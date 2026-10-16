@@ -144,5 +144,17 @@ public class ResultsController : ControllerBase
             .ToListAsync();
 
         return Ok(results.Select(Map));
+
+        // GET /api/users/me/results - Participant only
+        [HttpGet("users/me/results")]
+        [Authorize(Roles = "Participant")]
+        public async Task<IActionResult> GetMyResults()
+        {
+            var results = await _db.Results
+                .Include(r => r.Enrolment).ThenInclude(e => e.User)
+                .Where(r => r.Enrolment.UserID == CurrentUserId)
+                .ToListAsync();
+            return Ok(results.Select(Map));
+        }
     }
 }
