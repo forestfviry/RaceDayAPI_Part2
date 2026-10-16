@@ -63,6 +63,7 @@ CREATE TABLE Entry (
         REFERENCES [User](UserID),
     CONSTRAINT FK_Entry_Category FOREIGN KEY (CategoryID)
         REFERENCES Category(CategoryID),
+
     CONSTRAINT UQ_Entry_Participant_Category UNIQUE (ParticipantID, CategoryID)
         -- stops the same participant double-entering one category
 );
