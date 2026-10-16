@@ -9,6 +9,14 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    env:
+      Jwt__Key: "ci-only-test-key-at-least-32-characters-long!"
+      Jwt__Issuer: "RaceDayAPI"
+      Jwt__Audience: "RaceDayClient"
+      ConnectionStrings__DefaultConnection: "Server=localhost;Database=RaceDayCI;Trusted_Connection=False;"
+      ASPNETCORE_ENVIRONMENT: "Testing"
+
     steps:
       - uses: actions/checkout@v4
 
